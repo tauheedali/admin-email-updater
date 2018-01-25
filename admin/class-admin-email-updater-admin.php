@@ -18,15 +18,18 @@ class Admin_Email_Updater_Admin{
 							 );
 	}
 	
-	public function update_option_new_admin_email( $old_value, $value ) {
-			$email = get_option( 'new_admin_email' );
-			apply_filters( 'send_email_change_email', false, $user, $userdata ); //Cancels Confirmation Email
-			update_option( 'admin_email', $email );			
-		}
-	
-	public function cancel_confirmation_email(){
-		return false;
-	}
-	
+	public function update_option_new_admin_email( $old_value, $value ) {	
+			//Disable Worpress Email Change Email
+			remove_action( 'add_option_new_admin_email', 'update_option_new_admin_email' );
+			remove_action( 'update_option_new_admin_email', 'update_option_new_admin_email' );
+		
+			//Diisable Confirmation Emails
+			apply_filters( 'send_email_change_email', false, "", "" ); //Cancels Confirmation Email - Confirm New
+			remove_action( 'update_option_admin_email', 'wp_site_admin_email_change_notification', 10, 3 ); //Cancels Confirmation Email - Confirm Email Change
+			
+			//Update Admin Email
+			$email = get_option( 'new_admin_email' );	
+			update_option( 'admin_email', $email );					
+		}	
 }
 ?>
