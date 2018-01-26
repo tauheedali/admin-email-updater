@@ -1,13 +1,5 @@
 <?php
-/*
- * Plugin Name:       Admin Email Updater
- * Plugin URI:        https://github.com/tauheedali/admin-email-updater
- * Description:       Updates admin email without sending confirmation email
- * Version:           1.0.0
- * Author:            Tauheed Ali For Mainstreethost
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- */
+
 class Admin_Email_Updater{
 	
 	protected $loader;
